@@ -1,17 +1,20 @@
 class Dustbin {
-    constructor(x, y, width, height) {
-      var options = {
-          isStatic: true,
-           }
-      this.body = Bodies.rectangle(x, y, width, height, options);
-      this.width = width;
-      this.height = height;
-      World.add(world, this.body);
+  constructor(x, y, width, height) {
+    var options = {
+        isStatic:true,
+      
     }
-    display(){
-      var pos =this.body.position;
-        rectMode(CENTER);
-        fill(255, 255, 255, 0.5);
-        rect(pos.x, pos.y, this.width, this.height);
-      }
-}
+    this.body = Bodies.rectangle(x, y, width, height, options);
+    this.width = width;
+    this.height = height;
+    
+    World.add(world, this.body);
+  }
+  display(){
+    rectMode(CENTER);
+
+    fill("white");
+
+    rect(this.body.position.x, this.body.position.y, this.width, this. height);
+  }
+};

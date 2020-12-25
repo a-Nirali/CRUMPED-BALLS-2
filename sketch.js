@@ -1,63 +1,52 @@
 const Engine = Matter.Engine;
- const World = Matter.World;
- const Bodies = Matter.Bodies;
- const Body = Matter.Body;
+const World= Matter.World;
+const Bodies = Matter.Bodies;
 
- var paper,ground,side0,side1,side2;
+var engine, world;
+var ground,paper;
+var binImg,bin;
+
 
 function preload(){
-	
+    binImg = loadImage("dustbin.png");
+  
+}
+function setup(){
+    var canvas = createCanvas(1350,600);
+    engine = Engine.create();
+    world = engine.world;
+
+    ground = new Ground();
+    paper = new Paper(1100,50);
+
+    bin = createSprite(964,500,20,20);
+    bin.addImage(binImg);
+    bin.scale = 0.45;
+
+    binPart1 = new Dustbin(909,510,10,120);
+    binPart2 = new Dustbin(965,580,130,10);
+    binPart3 = new Dustbin(1020,510,10,120);
+  
 }
 
-function setup() {
-	 createCanvas(800, 700);
-  
-	
-	 engine = Engine.create();
-	 world = engine.world;
+function draw(){
+    background("white");
+    Engine.update(engine);
 
-	 paper = new Paper(100, 600, 10);
-
-     ground = new Ground(400, 680, 800, 20);
-  
-	 side0 = new Dustbin(550, 620, 20, 100);
-     side1 = new Dustbin(635, 660, 150, 20);
-     side2 = new Dustbin(720, 620, 20, 100);
+   
 
     
-
-     Engine.run(engine);
-  
-}
-
-
-function draw() {
-
-  imageMode(CENTER);
-  background("white");
-
-  Engine.update(engine);
-
-  paper.display();
- ground.display();
-
- side0.display();
-  side1.display();
-  side2.display();
-
-
-  drawSprites();
- 
+    ground.display();
+    paper.display();
+    binPart1.display();
+    binPart2.display();
+    binPart3.display(); 
+      
+    drawSprites();
 }
 
 function keyPressed(){
-	if(keyCode === UP_ARROW)  {
-	   Matter.Body.applyForce(paper.body, paper.body.position, 
-		   {x:65, y: -65})
-	}
-
-  }
-
-
-
- 
+    if(keyCode === UP_ARROW){
+        Matter.Body.applyForce(paper.body,paper.body.position,{x:80,y:-80});
+    }
+}
